@@ -2,10 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import store from "../redux/store";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
     const [toggle, setToggle] = useState(false);
 
+    const cart = useSelector(state=>state.cartItems);
     return (
         <>
             <nav className="fixed w-full z-50"> {/* Added "fixed" class and z-50 for stacking order */}
@@ -43,7 +46,10 @@ const Navbar = () => {
                         </div>
                         <div className='flex flex-row items-center'>
                             <img className='m-4 cursor-pointer' src="/icons/usericon.png" width={25} />
-                            <img className='cursor-pointer' src="/icons/shoppingbag.png" width={25} />
+                            <Link href={'/cart'} className="flex flex-row cursor-pointer">
+                                <img className='cursor-pointer' src="/icons/shoppingbag.png" width={25}/>
+                                <p>{cart}</p>
+                            </Link>
                             {toggle ? (
                                 <img className='md:block sm:block lg:hidden cursor-pointer m-4 ' onClick={() => setToggle(!toggle)} src="/icons/closewindow.png" width={25} />
                             ) : (
