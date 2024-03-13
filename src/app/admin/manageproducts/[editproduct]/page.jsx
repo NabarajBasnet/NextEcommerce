@@ -1,6 +1,7 @@
 'use client'
 
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 
 
@@ -8,6 +9,8 @@ import { useEffect, useState } from "react"
 const EditProducts = (props) =>
 {
     const productId = props.params.editproduct;
+
+    const[edited, setEdited] = useState(false);
 
     const[name, setName] = useState()
     const[description, setDescription] = useState()
@@ -33,6 +36,7 @@ const EditProducts = (props) =>
     setStocks(data.result[0].stocks)
   }
 
+  const router = useRouter()
 
   // function to submit the product image
   const uploadImage = async(e)=>
@@ -66,7 +70,8 @@ const EditProducts = (props) =>
       },1500);
       setToggle(true);
       setName(''), setDescription(''), setPrice(''), setCategory(''), setStocks('');
-     }
+     router.push('/admin/allproducts')
+    }
     }
     catch(error){
       alert(error);

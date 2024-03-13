@@ -13,19 +13,6 @@ export const GET = async()=>
 
 export const POST =  async(req)=>
 {
-
-    // // 
-    // const imageData = await req.formData();
-    // const image = imageData.get('image');
-    // if(!image){
-    //     return NextResponse.json({'message':'image nout found',success: false})
-    // }
-    // const byteData = await image.arrayBuffer();
-    // const buffer = Buffer.from(byteData);
-    // const path = `./public/productsimage/${image.name}`;
-    // await writeFile(path, buffer);
-    // // 
-
     const payload = await req.json();
     const product = await new Product(payload);
     const data = product.save();

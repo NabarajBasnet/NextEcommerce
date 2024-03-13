@@ -23,7 +23,7 @@ const Navbar = () => {
                                     <li className='m-2'><Link href={'/all'}>All</Link></li>
                                     <li className='m-2'><Link href={'/categories/apparel'}>Apparel</Link></li>
                                     <li className='m-2'><Link href={'/categories/accessories'}>Accessories</Link></li>
-                                    {/* <li className='m-2'><Link href={'/admin'}>Admin Dashboard</Link></li> */}
+                                    <li className='m-2'><Link href={'/admin'}>Admin Dashboard</Link></li>
                                 </ul>
                             </div>
                         ) : (
@@ -32,7 +32,7 @@ const Navbar = () => {
                                     <li className='m-2'><Link href={'/all'}>All</Link></li>
                                     <li className='m-2'><Link href={'/categories/apparel'}>Apparel</Link></li>
                                     <li className='m-2'><Link href={'/categories/accessories'}>Accessories</Link></li>
-                                    {/* <li className='m-2'><Link href={'/admin'}>Admin Dashboard</Link></li> */}
+                                    <li className='m-2'><Link href={'/admin'}>Admin Dashboard</Link></li>
                                 </ul>
                             </div>
                         )}

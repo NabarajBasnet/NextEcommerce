@@ -1,32 +1,38 @@
-// Product.js
-
 'use client';
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddToCart, RemoveFromCart } from '@/components/redux/action';
 
-const Product = (props) => {
+const Product = (props) =>
+{
+  
+  // Current Product Id
   const productId = props.params.product;
 
+  // Redux
   const cartItems = useSelector(state=>state.cartItems);
   const dispatch = useDispatch();
 
+  // States
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [rendered, setRendered] = useState(false);
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     try {
       getSingleProductDetails();
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  },[]);
+  
 
-  const getSingleProductDetails = async () => {
+  const getSingleProductDetails = async()=>
+  {
     try {
       const res = await fetch(`http://localhost:3000/api/products/${productId}`);
       const data = await res.json();
@@ -37,7 +43,8 @@ const Product = (props) => {
       if (!name) {
         setRendered(true);
       }
-    } catch (error) {
+    }
+    catch (error) {
       alert(error);
     }
   };
@@ -48,7 +55,6 @@ const Product = (props) => {
       <div className="container mx-auto p-8 bg-white shadow-md rounded-md">
         <div className=" mt-20 lg:flex ">
           <div className="lg:w-1/2 pr-8">
-            {/* Placeholder for product image */}
             <img
               src="https://via.placeholder.com/600x600"
               alt="Product Image"
@@ -56,16 +62,20 @@ const Product = (props) => {
             />
           </div>
           <div className="lg:w-1/2">
-            <h1 className="text-3xl font-bold mb-4">{name}</h1>
-            <p className="text-gray-600 mb-4">{description}</p>
-            <p className="text-lg font-semibold mb-4">$ {price}</p>
-            <p className="text-gray-600 mb-4">Category: {category}</p>
-            {rendered && (
-              <button className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-md w-full" 
-                onClick={()=>dispatch(AddToCart)}>
-                Add To Cart
-              </button>
-            )}
+            {rendered?(
+              <div>
+                <h1 className="text-3xl font-bold mb-4">{name}</h1>
+                <p className="text-gray-600 mb-4">{description}</p>
+                <p className="text-lg font-semibold mb-4">$ {price}</p>
+                <p className="text-gray-600 mb-4">Category: {category}</p>
+                <button className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-md w-full" 
+                  onClick={()=>dispatch(AddToCart)}>
+                  Add To Cart
+                </button>
+              </div>
+            )
+            :
+            ('')}
           </div>
         </div>
       </div>
