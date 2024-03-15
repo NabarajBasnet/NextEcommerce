@@ -20,6 +20,23 @@ const Product = (props) =>
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [rendered, setRendered] = useState(false);
+  const [inCart, setInCart] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+
+  const productObj = {name, description, price, category, quantity};
+
+  // Handle Click add to cart button
+  const handleClickAddToCart = (product)=>
+  {
+    // Dispatch the AddToCart action with the product details as payload
+    dispatch(AddToCart(product));
+    setInCart(true) // Update inCart state for UI feedback (optional)
+    setQuantity(quantity+1)
+  };
+
+
+
+
 
   useEffect(() =>
   {
@@ -69,7 +86,7 @@ const Product = (props) =>
                 <p className="text-lg font-semibold mb-4">$ {price}</p>
                 <p className="text-gray-600 mb-4">Category: {category}</p>
                 <button className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-md w-full" 
-                  onClick={()=>dispatch(AddToCart)}>
+                  onClick={()=>handleClickAddToCart(productObj)}>
                   Add To Cart
                 </button>
               </div>

@@ -36,7 +36,7 @@ function All() {
     <>
       <div className='bg-slate-300 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8 p-8'>
         {products.map((item, i) => (
-          <Link href={`/all/${item._id}`}>
+          <Link href={`/all/${item._id}`} key={i}>
           <div
             key={i}
             className='cursor-pointer'

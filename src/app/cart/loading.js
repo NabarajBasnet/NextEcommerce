@@ -4,7 +4,7 @@ const CartLoading = ()=>
 {
     return(
         <>
-        <h>Loading...</h>
+        <h1>Loading...</h1>
         </>
     )
 }
