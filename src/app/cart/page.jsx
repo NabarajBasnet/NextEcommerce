@@ -1,35 +1,28 @@
 'use client'
 
-import { useSelector, useDispatch } from "react-redux";
-import { AddToCart, RemoveFromCart } from "@/components/redux/action";
-import { useEffect, useState } from "react";
-
+import { useEffect } from "react";
+import { useSelector} from "react-redux";
 
 
 const CartPage = ()=>
 {
-    const[cartProducts, setCartProducts] = useState([]);
+
+
     const reducerProducts = useSelector(state => state.cartItems);
-    
-    console.log(cartProducts)
+    const subTotal = useSelector(state => state.subTotal);
 
     useEffect(()=>
     {
-        handleSetCartItemsInCart()
-    },[]);
 
-    const handleSetCartItemsInCart = async()=>
-    {
-        const res = await reducerProducts;
-        setCartProducts(res);
-        console.log(res)
-    }
+    },[subTotal])
+
+    console.log(reducerProducts)
     return(
         <>
         <div className="flex justify-center flex-col text-center items-center">
             <h1 className="mt-20">Cart Page</h1>
 
-            {cartProducts.map((val, i)=>(
+            {reducerProducts.map((val, i)=>(
                 <div key={i} className="flex mt-20">
                     <ul>
                     <img
@@ -38,9 +31,12 @@ const CartPage = ()=>
                         className="w-full h-auto rounded-md shadow-md md:w-64"
                     />
                         <li>{val.name}</li>
-                        <li>{val.price}</li>
+                        <li>$ {val.price}</li>
                         <li>{val.category}</li>
+                        <li> <b> <p> Qty: {val.quantity}</p></b></li>
                     </ul>
+                    <h1>Sub Total: {subTotal}</h1>
+
                 </div>
             ))}
         </div>

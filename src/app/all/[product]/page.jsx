@@ -14,24 +14,30 @@ const Product = (props) =>
   const cartItems = useSelector(state=>state.cartItems);
   const dispatch = useDispatch();
 
+  // variables
+  const view = 'view -->';
+
   // States
+  const [_id, set_id] = useState();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [rendered, setRendered] = useState(false);
   const [inCart, setInCart] = useState(false);
-  const [quantity, setQuantity] = useState(0);
 
-  const productObj = {name, description, price, category, quantity};
+  const productObj = {_id,name, description, price, category};
 
   // Handle Click add to cart button
   const handleClickAddToCart = (product)=>
   {
     // Dispatch the AddToCart action with the product details as payload
+    
     dispatch(AddToCart(product));
+    setTimeout(()=>{
+      setInCart(false);
+    },1500)
     setInCart(true) // Update inCart state for UI feedback (optional)
-    setQuantity(quantity+1)
   };
 
 
@@ -53,6 +59,7 @@ const Product = (props) =>
     try {
       const res = await fetch(`http://localhost:3000/api/products/${productId}`);
       const data = await res.json();
+      set_id(data.result[0]._id);
       setName(data.result[0].name);
       setDescription(data.result[0].description);
       setPrice(data.result[0].price);
@@ -93,6 +100,9 @@ const Product = (props) =>
             )
             :
             ('')}
+            {inCart?(
+              <h1>View Cart... <span>view</span></h1>
+            ):('')}
           </div>
         </div>
       </div>
