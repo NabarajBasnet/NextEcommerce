@@ -10,13 +10,20 @@ const Navbar = () =>
     // states
     const [toggle, setToggle] = useState(false);
 
-
-    // redux 
-    const totalProductsInCart = useSelector(state => state.totalItems)    
+    const cartItems = useSelector(state => state.cartItems);
+    const [cartItemsLength, setCartItemsLength] = useState(0)
+    useEffect(()=>
+    {
+        setCartItemsLength(cartItems.reduce((acc, item) => acc+item.quantity, 0))
+    },[cartItems])
     useEffect(()=>
     {
 
-    },[totalProductsInCart])
+    },[cartItemsLength])
+    // redux
+    // const cartItemsLength = useSelector(state => state.cartItems.length)
+    // redux 
+    // const totalProductsInCart = useSelector(state => state.totalItems)    
     return (
         <>
             <nav className="fixed w-full z-50"> {/* Added "fixed" class and z-50 for stacking order */}
@@ -56,7 +63,7 @@ const Navbar = () =>
                             <img className='m-4 cursor-pointer' src="/icons/usericon.png" width={25} />
                             <Link href={'/cart'} className="flex flex-row cursor-pointer">
                                 <img className='cursor-pointer' src="/icons/shoppingbag.png" width={25}/>
-                                <p>{totalProductsInCart}</p>
+                                <p>{cartItemsLength}</p>
                             </Link>
                             {toggle ? (
                                 <img className='md:block sm:block lg:hidden cursor-pointer m-4 ' onClick={() => setToggle(!toggle)} src="/icons/closewindow.png" width={25} />

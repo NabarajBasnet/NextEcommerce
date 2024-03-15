@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddToCart, RemoveFromCart } from '@/components/redux/action';
+import Link from 'next/link';
 
 const Product = (props) =>
 {
@@ -36,7 +37,7 @@ const Product = (props) =>
     dispatch(AddToCart(product));
     setTimeout(()=>{
       setInCart(false);
-    },1500)
+    },3000)
     setInCart(true) // Update inCart state for UI feedback (optional)
   };
 
@@ -92,6 +93,11 @@ const Product = (props) =>
                 <p className="text-gray-600 mb-4">{description}</p>
                 <p className="text-lg font-semibold mb-4">$ {price}</p>
                 <p className="text-gray-600 mb-4">Category: {category}</p>
+                {inCart?(
+                  <div className='flex justify-center items-center hover:underline text-cyan-500 '>
+                    <Link href={'/cart'}>View Cart</Link>
+                  </div>
+                ):('')}
                 <button className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-md w-full" 
                   onClick={()=>handleClickAddToCart(productObj)}>
                   Add To Cart
@@ -100,9 +106,7 @@ const Product = (props) =>
             )
             :
             ('')}
-            {inCart?(
-              <h1>View Cart... <span>view</span></h1>
-            ):('')}
+
           </div>
         </div>
       </div>

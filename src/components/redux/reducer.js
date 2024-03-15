@@ -9,8 +9,8 @@ const initialState = {
 
 const cartReducer = (state=initialState, action)=>
 {
-    console.log('Sub Total: ',state.subTotal)
-    console.log('Total Items: ',state.totalItems)
+    // console.log('Sub Total: ',state.subTotal)
+    console.log('Total Items: ',state.cartItems)
     switch(action.type)
     {
         case 'ADD_TO_CART':
@@ -27,9 +27,9 @@ const cartReducer = (state=initialState, action)=>
                         item.name === name && item._id === action.payload._id ? {...item, quantity: item.quantity+1}:item
                         ),
                     // Calculate total items and subtotal here
-                    totalItems : state.cartItems.reduce((acc, item)=> acc + item.quantity, 0),
-                    subTotal : state.cartItems.reduce((acc, item)=> acc + item.price * item.quantity, 0),
-                    }
+                    totalItems: state.cartItems.reduce((acc, item) => acc+item.quantity, 0),
+                    subTotal: state.cartItems.reduce((acc, item) => acc+item.price * item.quantity, 0),
+                }
                     
             }
             else
@@ -43,12 +43,6 @@ const cartReducer = (state=initialState, action)=>
                     subTotal: state.cartItems.reduce((acc, item)=>acc + item.price * item.quantity, 0),
                 }
             }
-
-
-
-
-
-
 
             // return{...state, cartItems: [...state.cartItems, action.payload]}
             
