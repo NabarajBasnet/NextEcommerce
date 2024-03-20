@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 const Product = (props) =>
 {
-  
   // Current Product Id
   const productId = props.params.product;
 
@@ -15,19 +14,17 @@ const Product = (props) =>
   const cartItems = useSelector(state=>state.cartItems);
   const dispatch = useDispatch();
 
-  // variables
-  const view = 'view -->';
-
   // States
   const [_id, set_id] = useState();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [imageurl, setImageUrl] = useState('')
   const [rendered, setRendered] = useState(false);
   const [inCart, setInCart] = useState(false);
 
-  const productObj = {_id,name, description, price, category};
+  const productObj = { _id, name, description, price, category, imageurl};
 
   // Handle Click add to cart button
   const handleClickAddToCart = (product)=>
@@ -38,12 +35,8 @@ const Product = (props) =>
     setTimeout(()=>{
       setInCart(false);
     },3000)
-    setInCart(true) // Update inCart state for UI feedback (optional)
+    setInCart(true); // Update inCart state for UI feedback (optional)
   };
-
-
-
-
 
   useEffect(() =>
   {
@@ -54,13 +47,13 @@ const Product = (props) =>
     }
   },[]);
   
-
   const getSingleProductDetails = async()=>
   {
     try {
       const res = await fetch(`http://localhost:3000/api/products/${productId}`);
       const data = await res.json();
       set_id(data.result[0]._id);
+      setImageUrl(data.result[0].imageurl);
       setName(data.result[0].name);
       setDescription(data.result[0].description);
       setPrice(data.result[0].price);
@@ -81,8 +74,10 @@ const Product = (props) =>
         <div className=" mt-20 lg:flex ">
           <div className="lg:w-1/2 pr-8">
             <img
-              src="https://via.placeholder.com/600x600"
-              alt="Product Image"
+              src={imageurl}
+              width={350}
+              height={350}
+              alt="Image Loading..."
               className="w-full h-auto rounded-md shadow-md md:w-64"
             />
           </div>

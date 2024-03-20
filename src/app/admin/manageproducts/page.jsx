@@ -11,26 +11,57 @@ const ManageProducts = () =>
   const[price, setPrice] = useState()
   const[category, setCategory] = useState()
   const[stocks, setStocks] = useState()
-  const[image, setImage] = useState()
   const[toggle, setToggle] = useState(false)
   const[emptyField, setEmptyField] = useState(false);
+  const[image, setImage] = useState(null)
+  const[imageurl, setImgUrl] = useState()
+  const[wait, setWait] = useState(false);
+  console.log(imageurl);
+
+  // Function to upload image 
 
 
-  // function to submit the product image
-  const uploadImage = async(e)=>
+  let cld_obj = {
+    CLOUD_NAME:'dhur2ubp8',
+    API_KEY:'414511992419123',
+    API_SECRET:'oigXwOx-X-ziEtvbMDo55k2QGnY',
+  }
+
+  const handleUploadImage = async(type)=>
   {
-    e.preventDefault();
     const data = new FormData();
-    data.set('image', image);
-    await fetch('api/products',{
+    data.append('file', type==='image'? image:null);
+    data.append('upload_preset', type==="image"? 'image_preset':'image_preset');
+
+    const resourceType = type==='image'?'image':null
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cld_obj.CLOUD_NAME}/${resourceType}/upload`,{
       method:'POST',
       body:data
     })
+    const result = await res.json();
+    setImgUrl(String(result.secure_url));
+    if(!imageurl)
+    {
+      setWait(true);
+    }
+    else
+    {
+      setWait(false);
+    }
+  }
+
+
+  const prevent = (e)=>
+  {
+    e.preventDefault();
+    handleUploadImage('image')
   }
 
   // function to submit the product details
   const handleSubmit = async(e)=>
   {
+    e.preventDefault();
+    // const ImgUrl = handleUploadImage('image');
     try{
       if(!name || !description || !price || !category || !stocks)
       {
@@ -41,17 +72,25 @@ const ManageProducts = () =>
         setEmptyField(true)
       }
       else{
-  
-      await fetch('http://localhost:3000/api/products',{
-        method:'POST',
-        body:JSON.stringify({name, description, price, category, stocks})
-      })
-      // uploadImage(e);
+      if(image)
+      {
+        await fetch('http://localhost:3000/api/products',{
+          method:'POST',
+          body:JSON.stringify({name, description, price, category, stocks, imageurl})
+        })
+        console.log(imageurl)
+        console.log(name)
+
+      }
+      else{
+        console.log('Wait...');
+      }
       setTimeout(()=>{
         setToggle(false)
       },1500)
       setToggle(true)
-      setName(''), setDescription(''), setPrice(''), setCategory(''), setStocks('');
+      setName(''), setDescription(''), setPrice(''), setCategory(''), setStocks(''),setImage(null);
+
      }
     }
     catch(error){
@@ -65,17 +104,19 @@ const ManageProducts = () =>
         {toggle?(
           <p className="text-green-500 font-sans font-xs">Product Added.</p>
         ):('')}
-          {emptyField?(<p className="flex justify-center text-red-600 font-sans font-xs">Empty fields can't prooceed ahed!</p>):('')}
+          {emptyField?(<p className="flex justify-center text-red-600 font-sans font-xs"><b> Empty fields can't prooceed ahed! </b></p>):('')}
 
         <form className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 rounded">
-          <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product name' type="text" placeholder="Product name" value={name} onChange={(e)=>setName(e.target.value)} />
-          <textarea className="border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
-          <input className='border rounded   border-black m-3' type="text" placeholder="Product price" value={price} onChange={(e)=>setPrice(e.target.value)} />
-          <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product name' type="text" placeholder="Product category" value={category} onChange={(e)=>setCategory(e.target.value)}/>
-          <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product name' type="text" placeholder="Stokcs" value={stocks} onChange={(e)=>setStocks(e.target.value)} />
           <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product name' type="file" name="file" onChange={(e)=>setImage(e.target.files?.[0])} />
+          <button onClick={(e)=>prevent(e)}>Set Image</button>
+          <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product name' type="text" placeholder="Product name" value={name} onChange={(e)=>setName(e.target.value)} />
+          <textarea className="border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product description" value={description} onChange={(e) => setDescription(e.target.value)} ></textarea>
+          <input className='border rounded   border-black m-3' type="text" placeholder="Product price" value={price} onChange={(e)=>setPrice(e.target.value)} />
+          <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product name' type="text" placeholder="Product category" value={category} onChange={(e)=>setCategory(e.target.value)} />
+          <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product name' type="text" placeholder="Stokcs" value={stocks} onChange={(e)=>setStocks(e.target.value)} />
         </form>
         <button className='border border-cyan-600 rounded w-36 py-2 px-4 text-center text-white bg-cyan-500 hover:bg-cyan-700' onClick={handleSubmit}>Add Product</button>
+        <img src={imageurl} alt="Image Preview will show here..." width={400} height={400}/>
       </div>
     )
   }

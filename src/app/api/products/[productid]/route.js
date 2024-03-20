@@ -33,3 +33,4 @@ export const DELETE = async(req, content)=>
     return NextResponse.json({result: data, success: true});
 }
 
+

@@ -15,7 +15,7 @@ const cartReducer = (state=initialState, action)=>
     {
         case 'ADD_TO_CART':
             
-            const{_id, name, description, price, category} = action.payload;
+            const{_id, name, description, price, category, stocks, imageurl} = action.payload;
             // Check if product already exist in the cartItems array of objects
             const existingProduct = state.cartItems.find(item => item.name === name && item._id === action.payload._id);  // Check name and unique ID
             if(existingProduct)
@@ -37,7 +37,7 @@ const cartReducer = (state=initialState, action)=>
                 // New product, add it with quantity 1
                 return{
                     ...state,
-                    cartItems: [...state.cartItems, {_id, name, description, price, category, quantity: 1}],
+                    cartItems: [...state.cartItems, {_id, name, description, price, category, stocks, imageurl, quantity: 1}],
                     // Calculate total items and subtotal here
                     totalItems: state.cartItems.reduce((acc, item)=> acc + item.quantity, 0),
                     subTotal: state.cartItems.reduce((acc, item)=>acc + item.price * item.quantity, 0),

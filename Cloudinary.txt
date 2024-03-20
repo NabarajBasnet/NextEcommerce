@@ -1,0 +1,5 @@
+Cloud name: dhur2ubp8,
+API Key: 414511992419123,
+API Secret: oigXwOx-X-ziEtvbMDo55k2QGnY;
+API environment variable: CLOUDINARY_URL=cloudinary://414511992419123:oigXwOx-X-ziEtvbMDo55k2QGnY@dhur2ubp8,
+

@@ -2,7 +2,6 @@ import connectionStr from "@/app/lib/DB"
 import Product from "@/app/lib/productsSchema/productSchema";
 import mongoose from "mongoose"
 import { NextResponse } from "next/server"
-import {writeFile} from 'fs/promises'
 
 export const GET = async()=>
 {

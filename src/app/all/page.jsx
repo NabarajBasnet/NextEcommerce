@@ -2,11 +2,17 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+
 
 function All() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+
+
 
   useEffect(() => {
     getProducts();
@@ -34,18 +40,20 @@ function All() {
 
   return (
     <>
-      <div className='bg-slate-300 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8 p-8'>
+      <div className='bg-slate-300 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-8 p-8 '>
         {products.map((item, i) => (
           <Link href={`/all/${item._id}`} key={i}>
           <div
             key={i}
             className='cursor-pointer'
           >
-            <div className='mt-14 bg-white rounded-lg overflow-hidden shadow-lg transition duration-300 transform hover:scale-105'>
+            <div className='mt-10 bg-white rounded-lg overflow-hidden shadow-lg transition duration-300 transform hover:scale-105'>
             <img
-              src="https://via.placeholder.com/400x400"
+              src={item.imageurl}
               alt="Product Image"
-              className="w-full h-auto rounded-md shadow-md md:w-64"
+              className="w-full h-auto object-cover rounded-md shadow-md md:w-64"
+              width={350}
+              height={350}
             />
               <div className='p-6'>
                 <h2 className='text-xl font-bold mb-2'>{item.name}</h2>
