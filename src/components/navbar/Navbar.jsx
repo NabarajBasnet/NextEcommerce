@@ -55,7 +55,7 @@ const Navbar = () =>
                     <div className='flex items-center mr-5'>
                         <div className='md:hidden sm:hidden lg:block'>
                             <div className='flex items-center border-2 w-64 border-solid border-black rounded-lg p-1 '>
-                                <input className='outline-0 bg-transparent' type="text" placeholder="Search here..." />
+                                <input  className='outline-0 bg-transparent' type="text" placeholder="Search here..." />
                                 <img className='cursor-pointer' src="/icons/searchicon.png" width={25} />
                             </div>
                         </div>

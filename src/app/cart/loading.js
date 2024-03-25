@@ -1,6 +1,6 @@
 
 
-const CartLoading = ()=>
+const Loading = ()=>
 {
     return(
         <>
@@ -9,4 +9,4 @@ const CartLoading = ()=>
     )
 }
 
-export default CartLoading;
+export default Loading;

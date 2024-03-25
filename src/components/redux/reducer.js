@@ -10,7 +10,7 @@ const initialState = {
 const cartReducer = (state=initialState, action)=>
 {
     // console.log('Sub Total: ',state.subTotal)
-    console.log('Total Items: ',state.cartItems)
+    // console.log('Total Items: ',state.cartItems)
     switch(action.type)
     {
         case 'ADD_TO_CART':
@@ -44,6 +44,7 @@ const cartReducer = (state=initialState, action)=>
                 }
             }
 
+            
             // return{...state, cartItems: [...state.cartItems, action.payload]}
             
 

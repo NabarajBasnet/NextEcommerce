@@ -26,17 +26,7 @@ function All() {
     setTotalPages(data.totalPages);
   };
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
 
   return (
     <>
@@ -66,22 +56,6 @@ function All() {
           </div>
           </Link>
         ))}
-      </div>
-      <div className='flex justify-center mt-4'>
-        <button
-          className='bg-gray-300 px-4 py-2 mr-2'
-          onClick={handlePrevPage}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <button
-          className='bg-gray-300 px-4 py-2'
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
       </div>
     </>
   );
