@@ -24,7 +24,7 @@ function AllProducts() {
           <div key={i} className="border border-black rounded p-4">
             <h2 className="text-xl font-bold mb-2">{item.name}</h2>
             <p className="text-gray-700 mb-2">{item.description}</p>
-            
+
             <div className="flex flex-row items-center justify-between">
 
               <div>
@@ -42,7 +42,7 @@ function AllProducts() {
               </div>
 
               <div>
-                <img src={item.imageurl} alt="Image Loading..." width={150} height={150}/>
+                <img src={item.imageurl} alt="Image Loading..." width={150} height={150} />
               </div>
             </div>
 

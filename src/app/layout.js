@@ -14,14 +14,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReduxProvider>
-        <Navbar/>
-        {children}
-        
-
-        </ReduxProvider>
-        
-        </body>
+        <main>
+          <ReduxProvider>
+            <div className="flex flex-col m-0 p-0">
+              <div className="mb-20"><Navbar /></div>
+              <div>{children}</div>
+            </div>
+          </ReduxProvider>
+        </main>
+      </body>
     </html>
   );
 }

@@ -5,32 +5,29 @@ import { NextResponse } from "next/server"
 
 
 
-export const GET = async(req, content)=>
-{
+export const GET = async (req, content) => {
     await mongoose.connect(connectionStr);
     const productId = content.params.productid;
-    const filter = {_id: productId};
+    const filter = { _id: productId };
     const data = await Product.find(filter);
-    return NextResponse.json({result: data, success: true})
+    return NextResponse.json({ result: data, success: true })
 }
 
-export const PUT = async(req, content)=>
-{
+export const PUT = async (req, content) => {
     await mongoose.connect(connectionStr)
     const productId = content.params.productid;
-    const filter = {_id: productId};
+    const filter = { _id: productId };
     const payload = await req.json();
     const data = await Product.findOneAndUpdate(filter, payload);
-    return NextResponse.json({result: data, success: true})
+    return NextResponse.json({ result: data, success: true })
 }
 
 
-export const DELETE = async(req, content)=>
-{
+export const DELETE = async (req, content) => {
     await mongoose.connect(connectionStr);
     const productId = content.params.productid;
     const data = await Product.findByIdAndDelete(productId);
-    return NextResponse.json({result: data, success: true});
+    return NextResponse.json({ result: data, success: true });
 }
 
 

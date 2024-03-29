@@ -1,11 +1,10 @@
 import Sidebar from "@/components/sidebar/sidebar";
 
 
-const AdminDashboard = ()=>
-{
-    return(
+const AdminDashboard = () => {
+    return (
         <>
-        Admin Panel
+            Admin Panel
         </>
     )
 }

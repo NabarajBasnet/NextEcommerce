@@ -2,7 +2,7 @@
 
 
 
-const Accessories = ()=>
+const Electronics = ()=>
 {
 
     // Spread operator used in an object
@@ -32,24 +32,11 @@ const Accessories = ()=>
     return(
         <>
         <div>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
-            <h1>Accessories page</h1>
+            <h1>Electronics page</h1>
         </div>
         </>
     )
 }
 
 
-export default Accessories;
+export default Electronics;
