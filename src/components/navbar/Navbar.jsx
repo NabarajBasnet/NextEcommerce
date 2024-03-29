@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import store from "../redux/store";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchQuery } from "../redux/action";
 
 const Navbar = () => {
     // states
     const [toggle, setToggle] = useState(false);
-
+    const [searchedWord, setSearchedWord] = useState('')
     const cartItems = useSelector(state => state.cartItems);
     const [cartItemsLength, setCartItemsLength] = useState(0)
     useEffect(() => {
@@ -17,10 +18,28 @@ const Navbar = () => {
     useEffect(() => {
 
     }, [cartItemsLength])
-    // redux
-    // const cartItemsLength = useSelector(state => state.cartItems.length)
-    // redux 
-    // const totalProductsInCart = useSelector(state => state.totalItems)    
+
+    const dispatch = useDispatch();
+
+    // Pass search query when key pressed
+    const handleKeyPress = (e)=>
+    {
+        if(e.key === 'Enter'){
+            dispatch(setSearchQuery(searchedWord))
+        }
+    }
+    const
+    // Pass search query when icon clicked 
+    clickAndSetSearched = ()=>
+    {
+        dispatch(setSearchQuery(searchedWord));
+    }   
+    // Pass search query in change of every letter 
+    useEffect(()=>
+    {
+        dispatch(setSearchQuery(searchedWord))
+    },[searchedWord])
+
     return (
         <>
             <nav className="fixed w-full  z-50"> {/* Added "fixed" class and z-50 for stacking order */}
@@ -54,8 +73,8 @@ const Navbar = () => {
                     <div className='flex items-center mr-5'>
                         <div className='md:hidden sm:hidden lg:block'>
                             <div className='flex items-center border-2 border-gray-400 lg:w-96  md:w-64 border-solid rounded-xl p-1 '>
-                                <input className='outline-0 h-9 bg-transparent lg:w-80 md:w-44' type="text" placeholder="Search products..." />
-                                <img className='cursor-pointer ml-10' src="/icons/searchicon.png" width={25} />
+                                <input onKeyPress={(e)=>handleKeyPress(e)} className='outline-0 h-9 bg-transparent lg:w-80 md:w-44' type="text" placeholder="Search products..." value={searchedWord} onChange={(e)=>setSearchedWord(e.target.value)}/>
+                                <img onClick={clickAndSetSearched} className='cursor-pointer ml-10' src="/icons/searchicon.png" width={25} />
                             </div>
                         </div>
                         <div className='flex flex-row items-center'>

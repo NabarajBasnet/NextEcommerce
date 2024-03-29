@@ -4,9 +4,11 @@ const initialState = {
     cartItems: [],
     totalItems: 0,
     subTotal: 0,
+    searchedWord: '',
 };
 
-
+console.log('Word: ',initialState.searchedWord)
+console.log('CartItems: ',initialState.cartItems)
 const cartReducer = (state = initialState, action) => {
     // console.log('Sub Total: ',state.subTotal)
     // console.log('Total Items: ',state.cartItems)
@@ -48,6 +50,12 @@ const cartReducer = (state = initialState, action) => {
             return {
                 // ...state,
                 // cartItems: state.cartItems.filter((item)=>item._id !== productId)
+            };
+
+        case 'SET_SEARCH_QUERY':
+            return {
+                ...state,
+                searchedWord: action.payload,
             };
 
         default:
