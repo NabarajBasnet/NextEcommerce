@@ -70,7 +70,7 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className='flex flex-row items-center'>
-                            <Link href={'/account'}>
+                            <Link href={'/account/signup/'}>
                                 <img className='m-4 cursor-pointer hover:scale-105 transition-all' src="/icons/usericon.png" width={25} />
                             </Link>
                             <Link href={'/cart'} className="flex flex-row cursor-pointer">

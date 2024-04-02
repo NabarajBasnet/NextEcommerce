@@ -7,8 +7,6 @@ const initialState = {
     searchedWord: '',
 };
 
-console.log('Word: ',initialState.searchedWord)
-console.log('CartItems: ',initialState.cartItems)
 const cartReducer = (state = initialState, action) => {
     // console.log('Sub Total: ',state.subTotal)
     // console.log('Total Items: ',state.cartItems)

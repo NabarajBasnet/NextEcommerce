@@ -6,7 +6,9 @@ import { NextResponse } from "next/server"
 
 export const GET = async()=>
 {
-    return NextResponse.json({result: true})
+    await mongoose.connect(connectionStr);
+    const data = await User.find();
+    return NextResponse.json({result: data, success: true})
 } 
 
 
