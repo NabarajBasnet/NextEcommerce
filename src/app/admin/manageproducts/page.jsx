@@ -106,7 +106,21 @@ const ManageProducts = () => {
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Product name" value={name} onChange={(e) => setName(e.target.value)} />
         <textarea className="border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product description" value={description} onChange={(e) => setDescription(e.target.value)} ></textarea>
         <input className='border rounded   border-black m-3' type="text" placeholder="Product price" value={price} onChange={(e) => setPrice(e.target.value)} />
-        <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Product category" value={category} onChange={(e) => setCategory(e.target.value)} />
+        <div class="border-2 rounded-lg border-black flex items-center justify-center w-64">
+          <select class="appearance-none bg-transparent border-none w-full py-2 px-4 leading-tight focus:outline-none" onChange={(e)=>setCategory(e.target.value)}>
+            <option value="electronics">Electronics</option>
+            <option value="mens clothing">Mens Clothing</option>
+            <option value="womens clothing">Womens Clothing</option>
+            <option value="gadgets">Gadgets</option>
+            <option value="bags">Bags</option>
+            <option value="watches">Watches</option>
+            <option value="supplements">Supplements</option>
+            <option value="bike accessories">Bike Accessories</option>
+            <option value="car accessories">Car Accessories</option>
+          </select>
+        </div>
+
+        <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="If other category" value={category} onChange={(e) => setCategory(e.target.value)} />
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Stokcs" value={stocks} onChange={(e) => setStocks(e.target.value)} />
       </form>
       <button className='border border-black rounded w-36 py-2 px-4 text-center text-white bg-black hover:bg-gray-700' onClick={handleSubmit}>Add Product</button>

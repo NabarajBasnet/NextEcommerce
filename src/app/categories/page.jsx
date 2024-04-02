@@ -1,15 +1,14 @@
-const { default: Link } = require("next/link")
+import Link from "next/link";
 
 
-const ProductCategories = ()=>
-{
-    return(
+const ProductCategories = () => {
+    return (
         <>
-        <ul>
-            <li><Link href={'categories/electronics'}>Electronics</Link></li>
-            <li><Link href={'categories/fashion'}>Fashion</Link></li>
-            <li><Link href={'categories/automotive'}>Automotive</Link></li>
-        </ul>
+            <ul>
+                <li><Link href={'categories/electronics'}>Electronics</Link></li>
+                <li><Link href={'categories/fashion'}>Fashion</Link></li>
+                <li><Link href={'categories/automotive'}>Automotive</Link></li>
+            </ul>
         </>
     )
 }

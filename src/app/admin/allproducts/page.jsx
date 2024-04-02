@@ -3,9 +3,11 @@
 import Deleter from "@/components/deleteProduct/Deleter";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 function AllProducts() {
   const [products, setProducts] = useState([]);
+  const queryWord = useSelector(state => state.searchedWord);
 
   useEffect(() => {
     getProducts();
@@ -20,7 +22,17 @@ function AllProducts() {
   return (
     <>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
-        {products.map((item, i) => (
+        {products.filter((product)=>
+        {
+          if(queryWord==='')
+          {
+            return true;
+          }
+          else
+          {
+           return product.name.toLowerCase().includes(queryWord.toLowerCase())
+          }
+        }).map((item, i) => (
           <div key={i} className="border border-black rounded p-4">
             <h2 className="text-xl font-bold mb-2">{item.name}</h2>
             <p className="text-gray-700 mb-2">{item.description}</p>

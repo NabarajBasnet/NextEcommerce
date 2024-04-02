@@ -4,18 +4,16 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddToCart, RemoveFromCart } from '@/components/redux/action';
 import Link from 'next/link';
+import Loading from './loading';
 
 const Product = (props) => {
-  // Current Product Id
-  const productId = props.params.product;
+  // JS code
+  const productId = props.params.product;   // Current Product Id
 
   // Redux
   const cartItems = useSelector(state => state.cartItems);
   var index = cartItems.length
   const dispatch = useDispatch();
-
-
-
 
   // States
   const [_id, set_id] = useState();
@@ -29,15 +27,13 @@ const Product = (props) => {
 
   const productObj = { _id, name, description, price, category, imageurl };
 
-  const addProductsToCart = async()=>
-  {
-    await fetch(`http://localhost:3000/api/cartitems`,{
-      method:'POST',
+  const addProductsToCart = async () => {
+    await fetch(`http://localhost:3000/api/cartitems`, {
+      method: 'POST',
       body: JSON.stringify(cartItems[Number(index)])
     })
   }
-  // Handle Click add to cart button
-  const handleClickAddToCart = (product) => {
+  const handleClickAddToCart = (product) => {     // Handle Click add to cart button
     // Dispatch the AddToCart action with the product details as payload
     dispatch(AddToCart(product));
     addProductsToCart()
@@ -62,7 +58,6 @@ const Product = (props) => {
       const data = await res.json();
       set_id(data.result[0]._id);
       setImageUrl(data.result[0].imageurl);
-      // console.log('Image url: ',data.result[0].imageurl);
       setName(data.result[0].name);
       setDescription(data.result[0].description);
       setPrice(data.result[0].price);
@@ -76,25 +71,26 @@ const Product = (props) => {
     }
   };
 
-
+  // JSX code
   return (
     <>
-      <div>
-        <div className="container mx-auto pl-8 pr-8 bg-white shadow-md rounded-md justify-around">
-          <div className=" lg:flex justify-around">
+      {rendered ? (
 
-            <div className='flex flex-row items-center h-screen justify-around'>
-              <div className="flex flex-row justify-around lg:w-1/2 pr-8">
-                <img
-                  src={imageurl}
-                  width={500}
-                  height={500}
-                  alt="Image Loading..."
-                  className=" rounded-xl shadow-md "
-                />
-              </div>
-              <div className="lg:w-1/2">
-                {rendered ? (
+        <div>
+          <div className="container mx-auto pl-8 pr-8 bg-white shadow-md rounded-md justify-around">
+            <div className=" lg:flex justify-around">
+              <div className='flex flex-row items-center h-screen justify-around'>
+                <div className="flex flex-row justify-around lg:w-1/2 pr-8">
+                  <img
+                    src={imageurl}
+                    width={500}
+                    height={500}
+                    alt="Image Loading..."
+                    className=" rounded-xl shadow-md "
+                  />
+                </div>
+                <div className="lg:w-1/2">
+
                   <div>
                     <h1 className="text-3xl font-bold mb-4">{name}</h1>
                     <p className="text-gray-600 mb-4">{description}</p>
@@ -111,16 +107,18 @@ const Product = (props) => {
                       Add To Cart
                     </button>
                   </div>
-                )
-                  :
-                  ('')}
-
+                </div>
               </div>
             </div>
-
           </div>
         </div>
-      </div>
+
+
+      ) : (
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <Loading />
+        </div>
+      )}
     </>
   );
 };

@@ -116,14 +116,27 @@ const EditProducts = (props) => {
       {toggle ? (
         <p className="text-sky-500">Update Changed</p>
       ) : ('')}
-      <form className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 rounded">
+      <form className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 rounded items-center">
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Product name" value={name} onChange={(e) => setName(e.target.value)} />
         <textarea className="border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Product price" value={price} onChange={(e) => setPrice(e.target.value)} />
+        <div>
+          <select onChange={(e)=>setCategory(e.target.value)}>
+            <option value={'electronics'}>electronics</option>
+            <option value={'mens clothing'}>mens clothing</option>
+            <option value={'womens clothing'}>womens clothing</option>
+            <option value={'gadgets'}>gadgets</option>
+            <option value={'bags'}>bags</option>
+            <option value="watches">Watches</option>
+            <option value={'supplements'}>supplements</option>
+            <option value={'bike accessories'}>bike accessories</option>
+            <option value={'car accessories'}>car accessories</option>
+          </select>
+        </div>
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Product category" value={category} onChange={(e) => setCategory(e.target.value)} />
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Stokcs" value={stocks} onChange={(e) => setStocks(e.target.value)} />
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="file" name="file" onChange={(e) => setImage(e.target.files?.[0])} />
-        <button onClick={(e) => handleImageUpdating(e)}>Confirm image</button>
+        <button className="bg-green-500 text-white font-bold h-10 rounded-lg" onClick={(e) => handleImageUpdating(e)}>Confirm image</button>
       </form>
       <button className='border border-cyan-600 rounded w-36 py-2 px-4 text-center text-white bg-cyan-500 hover:bg-cyan-700' onClick={handleSubmit}>Confirm Change</button>
       <img src={imageurl} alt="Image Loading..." width={200} height={200} />
