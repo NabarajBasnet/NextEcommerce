@@ -48,7 +48,6 @@ const Navbar = () => {
                             <div className='md:block lg:block sm:block '>
                                 <ul className='lg:flex flex-row items-start  '>
                                     <li className='m-2 hover:scale-105 transition-all'><Link href={'/all'}>All Products</Link></li>
-                                    <li className='m-2 hover:scale-105 transition-all'><Link href={'/categories'}>Categories</Link></li>
                                     <li className='m-2 hover:scale-105 transition-all'><Link href={'/admin'}>Admin</Link></li>
                                 </ul>
                             </div>
@@ -56,7 +55,6 @@ const Navbar = () => {
                             <div className='md:hidden lg:block sm:hidden '>
                                 <ul className='flex flex-row items-center '>
                                     <li className='m-2 hover:scale-105 transition-all'><Link href={'/all'}>All Products</Link></li>
-                                    <li className='m-2 hover:scale-105 transition-all'><Link href={'/categories'}>Categories</Link></li>
                                     <li className='m-2 hover:scale-105 transition-all'><Link href={'/admin'}>Admin</Link></li>
                                 </ul>
                             </div>
@@ -70,7 +68,7 @@ const Navbar = () => {
                             </div>
                         </div>
                         <div className='flex flex-row items-center'>
-                            <Link href={'/account/signup/'}>
+                            <Link href={'/account/login/'}>
                                 <img className='m-4 cursor-pointer hover:scale-105 transition-all' src="/icons/usericon.png" width={25} />
                             </Link>
                             <Link href={'/cart'} className="flex flex-row cursor-pointer">
