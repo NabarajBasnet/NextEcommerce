@@ -32,10 +32,10 @@ const Deleter = (props)=>
         <>
         <div>
             {deleteflag?(<p>Product Deleted !</p>):('')}
-            <button onClick={handleDeleteProduct}>Delete</button>
+            <button className="bg-red-500 text-white p-1 w-20 border rounded-lg" onClick={handleDeleteProduct}>Delete</button>
         </div>
         </>
     )
 }
 
-export default Deleter;
+export default Deleter; 

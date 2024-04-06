@@ -21,7 +21,7 @@ function AllProducts() {
 
   return (
     <>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
         {products.filter((product)=>
         {
           if(queryWord==='')
@@ -40,11 +40,13 @@ function AllProducts() {
             <div className="flex flex-row items-center justify-between">
 
               <div>
-                <p className="font-bold text-gray-700 mb-2">$ {item.price}</p>
-                <p className="font-bold text-gray-700 mb-2">Stock: {item.stocks}</p>
-                <p className="font-bold text-gray-700 mb-2">{item.category}</p>
+                <p className="font-bold text-gray-700 mb-2"><span className="text-blue-500">Price: </span> ${item.price}</p>
+                <p className="font-bold text-gray-700 mb-2"><span className="text-blue-500">Stock: </span>{item.stocks}</p>
+                <p className="font-bold text-gray-700 mb-2"><span className="text-blue-500">Category: </span>{item.category}</p>
+                <p className="font-bold text-gray-700 mb-2"><span className="text-blue-500">Sub Category: </span>{item.subcategory}</p>
+                <p className="font-bold text-gray-700 mb-2"><span className="text-blue-500">Brand Name: </span>{item.brandname}</p>
                 <Link href={'/admin/manageproducts/' + item._id}>
-                  <div className="text-blue-500 hover:underline cursor-pointer mr-2">
+                  <div className="text-red-500 hover:underline cursor-pointer mr-2">
                     Edit Product Details
                   </div>
                 </Link>

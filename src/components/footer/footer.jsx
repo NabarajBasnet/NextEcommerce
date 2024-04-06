@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="container mx-auto px-4">
                 <div className="flex flex-wrap justify-around items-center">
                     <div className="w-full md:w-1/3 lg:w-auto mb-6 md:mb-0">
-                        <h1 className="text-2xl font-bold"><Link href={'/all'}>ACME</Link></h1>
+                        <h1 className="text-2xl font-bold"><Link href={'/'}>ACME</Link></h1>
                     </div>
 
                     <div className="w-full md:w-1/3 lg:w-auto mb-6 md:mb-0">

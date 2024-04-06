@@ -13,6 +13,8 @@ const EditProducts = (props) => {
   const [description, setDescription] = useState()
   const [price, setPrice] = useState()
   const [category, setCategory] = useState()
+  const [subcategory, setSubcategory] = useState()
+  const [brandname, setBrandName] = useState()
   const [stocks, setStocks] = useState()
   const [toggle, setToggle] = useState(false)
   const [image, setImage] = useState(null)
@@ -69,6 +71,8 @@ const EditProducts = (props) => {
     setDescription(data.result[0].description)
     setPrice(data.result[0].price)
     setCategory(data.result[0].category)
+    setSubcategory(data.result[0].subcategory)
+    setBrandName(data.result[0].brandname)
     setStocks(data.result[0].stocks)
     setImageUrl(data.result[0].imageurl)
   }
@@ -87,21 +91,21 @@ const EditProducts = (props) => {
     const ImgUrl = handleUpdateImage('image');
 
     try {
-      if (!name && !description && !price && !category && !stocks && !image) {
+      if (!name && !description && !price && !category && !subcategory && !stocks && !image) {
         alert('Empty fields')
       }
       else {
 
         await fetch(`http://localhost:3000/api/products/${productId}`, {
           method: 'PUT',
-          body: JSON.stringify({ name, description, price, category, stocks, imageurl })
+          body: JSON.stringify({ name, description, price, category, subcategory, brandname, stocks, imageurl })
         })
         // uploadImage(e);
         setTimeout(() => {
           setToggle(false)
         }, 1500);
         setToggle(true);
-        setName(''), setDescription(''), setPrice(''), setCategory(''), setStocks(''), setImageUrl('');
+        setName(''), setDescription(''), setPrice(''), setCategory(''), setSubcategory(''), setBrandName(''), setStocks(''), setImageUrl('');
         router.push('/admin/allproducts')
       }
     }
@@ -134,6 +138,8 @@ const EditProducts = (props) => {
           </select>
         </div>
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Product category" value={category} onChange={(e) => setCategory(e.target.value)} />
+        <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Product sub category" value={subcategory} onChange={(e) => setSubcategory(e.target.value)} />
+        <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Product brand name" value={brandname} onChange={(e) => setBrandName(e.target.value)} />
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Stokcs" value={stocks} onChange={(e) => setStocks(e.target.value)} />
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="file" name="file" onChange={(e) => setImage(e.target.files?.[0])} />
         <button className="bg-green-500 text-white font-bold h-10 rounded-lg" onClick={(e) => handleImageUpdating(e)}>Confirm image</button>

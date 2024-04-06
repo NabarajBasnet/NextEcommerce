@@ -9,13 +9,17 @@ const ManageProducts = () => {
   const [description, setDescription] = useState()
   const [price, setPrice] = useState()
   const [category, setCategory] = useState()
+  const [subcategory, setSubCategory] = useState()
+  const [brandname, setBrandName] = useState()
   const [stocks, setStocks] = useState()
   const [toggle, setToggle] = useState(false)
   const [emptyField, setEmptyField] = useState(false);
   const [image, setImage] = useState(null)
   const [imageurl, setImgUrl] = useState()
   const [wait, setWait] = useState(false);
-  console.log(imageurl);
+  const [imageUploaded, setImageUploaded] = useState(false);
+  console.log(subcategory);
+  console.log(brandname);
 
   // Function to upload image 
 
@@ -39,10 +43,10 @@ const ManageProducts = () => {
     const result = await res.json();
     setImgUrl(String(result.secure_url));
     if (!imageurl) {
-      setWait(true);
+      setImageUploaded(true)
     }
     else {
-      setWait(false);
+      setImageUploaded(false)
     }
   }
 
@@ -57,7 +61,7 @@ const ManageProducts = () => {
     e.preventDefault();
     // const ImgUrl = handleUploadImage('image');
     try {
-      if (!name || !description || !price || !category || !stocks) {
+      if (!name || !description || !price || !category || !stocks || !subcategory) {
         setTimeout(() => {
           setEmptyField(false);
         }, 1500);
@@ -67,10 +71,8 @@ const ManageProducts = () => {
         if (image) {
           await fetch('http://localhost:3000/api/products', {
             method: 'POST',
-            body: JSON.stringify({ name, description, price, category, stocks, imageurl })
+            body: JSON.stringify({ name, description, price, category, subcategory, brandname, stocks, imageurl })
           })
-          console.log(imageurl)
-          console.log(name)
 
         }
         else {
@@ -80,14 +82,12 @@ const ManageProducts = () => {
           setToggle(false)
         }, 1500)
         setToggle(true)
-        setName(''), setDescription(''), setPrice(''), setCategory(''), setStocks(''), setImage(null);
-
+        setName(''), setDescription(''), setPrice(''), setCategory(''), setSubCategory(''), setBrandName(''), setStocks(''), setImage(null);
       }
     }
     catch (error) {
       alert(error);
     }
-
   }
 
   return (
@@ -97,7 +97,8 @@ const ManageProducts = () => {
       ) : ('')}
       {emptyField ? (<p className="flex justify-center text-red-600 font-sans font-xs"><b> Empty fields can't prooceed ahed! </b></p>) : ('')}
 
-      <form className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 rounded">
+      {/* <form className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 rounded"> */}
+      <form className="flex flex-col">
         <div className="flex flex-row items-center">
           <input className='flex flex-row items-center border rounded border-black m-3 px-3 py-2 h-20 focus:outline-none focus:ring-2 focus:ring-blue-500' type="file" name="file" onChange={(e) => setImage(e.target.files?.[0])} />
           <button className="bg-black text-white w-28 h-12 rounded-lg hover:bg-gray-700" onClick={(e) => prevent(e)}>Set Image</button>
@@ -106,7 +107,7 @@ const ManageProducts = () => {
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Product name" value={name} onChange={(e) => setName(e.target.value)} />
         <textarea className="border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Product description" value={description} onChange={(e) => setDescription(e.target.value)} ></textarea>
         <input className='border rounded   border-black m-3' type="text" placeholder="Product price" value={price} onChange={(e) => setPrice(e.target.value)} />
-        <div class="border-2 rounded-lg border-black flex items-center justify-center w-64">
+        {/* <div class="border-2 rounded-lg border-black flex items-center justify-center w-64">
           <select class="appearance-none bg-transparent border-none w-full py-2 px-4 leading-tight focus:outline-none" onChange={(e)=>setCategory(e.target.value)}>
             <option value="electronics">Electronics</option>
             <option value="mens clothing">Mens Clothing</option>
@@ -118,9 +119,11 @@ const ManageProducts = () => {
             <option value="bike accessories">Bike Accessories</option>
             <option value="car accessories">Car Accessories</option>
           </select>
-        </div>
+        </div> */}
 
-        <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="If other category" value={category} onChange={(e) => setCategory(e.target.value)} />
+        <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+        <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Subcategory" value={subcategory} onChange={(e) => setSubCategory(e.target.value)} />
+        <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Brand Name" value={brandname} onChange={(e) => setBrandName(e.target.value)} />
         <input className='border rounded border-black m-3 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500' type="text" placeholder="Stokcs" value={stocks} onChange={(e) => setStocks(e.target.value)} />
       </form>
       <button className='border border-black rounded w-36 py-2 px-4 text-center text-white bg-black hover:bg-gray-700' onClick={handleSubmit}>Add Product</button>
@@ -129,4 +132,4 @@ const ManageProducts = () => {
   )
 }
 
-export default ManageProducts
+export default ManageProducts;

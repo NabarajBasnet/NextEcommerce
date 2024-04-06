@@ -42,19 +42,19 @@ const Navbar = () => {
                 <div className='flex justify-between h-20 items-center bg-slate-100 p-1'>
                     <div className='flex flex-row items-center ml-5'>
                         <div className='font-bold hover:scale-110 transition-all'>
-                            <Link href={'/all'}>ACME</Link>
+                            <Link href={'/'}>ACME</Link>
                         </div>
                         {toggle ? (
-                            <div className='md:block lg:block sm:block '>
+                            <div className='md:block lg:block sm:block'>
                                 <ul className='lg:flex flex-row items-start  '>
-                                    <li className='m-2 hover:scale-105 transition-all'><Link href={'/all'}>All Products</Link></li>
+                                    <li className='m-2 hover:scale-105 transition-all'><Link href={'/all'}>Shop</Link></li>
                                     <li className='m-2 hover:scale-105 transition-all'><Link href={'/admin'}>Admin</Link></li>
                                 </ul>
                             </div>
                         ) : (
                             <div className='md:hidden lg:block sm:hidden '>
                                 <ul className='flex flex-row items-center '>
-                                    <li className='m-2 hover:scale-105 transition-all'><Link href={'/all'}>All Products</Link></li>
+                                    <li className='m-2 hover:scale-105 transition-all'><Link href={'/all'}>Shop</Link></li>
                                     <li className='m-2 hover:scale-105 transition-all'><Link href={'/admin'}>Admin</Link></li>
                                 </ul>
                             </div>
