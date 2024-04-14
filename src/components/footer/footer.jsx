@@ -3,8 +3,8 @@ import Link from "next/link"
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-800 text-white py-8">
-            <div className="container mx-auto px-4">
+        <footer className="bg-gray-800 text-white">
+            {/* <div className="container mx-auto px-4">
                 <div className="flex flex-wrap justify-around items-center">
                     <div className="w-full md:w-1/3 lg:w-auto mb-6 md:mb-0">
                         <h1 className="text-2xl font-bold"><Link href={'/'}>ACME</Link></h1>
@@ -31,7 +31,7 @@ const Footer = () => {
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </footer>
     );
 }

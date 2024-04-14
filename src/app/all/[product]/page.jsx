@@ -12,9 +12,8 @@ const Product = (props) => {
 
   // Redux
   const cartItems = useSelector(state => state.cartItems);
-  var index = cartItems.length
   const dispatch = useDispatch();
-
+  console.log('Cart Items: ',cartItems.length)
   // States
   const [_id, set_id] = useState();
   const [name, setName] = useState('');
@@ -25,18 +24,28 @@ const Product = (props) => {
   const [rendered, setRendered] = useState(false);
   const [inCart, setInCart] = useState(false);
 
-  const productObj = { _id, name, description, price, category, imageurl };
+  const [cartItemsLength, setCartItemsLength] = useState(0)
+  useEffect(() => {
+      setCartItemsLength(cartItems.reduce((acc, item) => acc + item.quantity, 0))
+  }, [cartItems])
+  useEffect(() => {
+  }, [cartItemsLength]);
 
+  const productObj = { _id, name, description, price, category, imageurl };
+  console.log(_id, name, description)
   const addProductsToCart = async () => {
-    await fetch(`http://localhost:3000/api/cartitems`, {
+    await fetch('http://localhost:3000/api/cartitems', {
       method: 'POST',
-      body: JSON.stringify(cartItems[Number(index)])
+      body: JSON.stringify(productObj)
     })
   }
+
   const handleClickAddToCart = (product) => {     // Handle Click add to cart button
     // Dispatch the AddToCart action with the product details as payload
     dispatch(AddToCart(product));
-    addProductsToCart()
+    setTimeout(() => {
+      addProductsToCart()
+    }, 3000)
     setTimeout(() => {
       setInCart(false);
     }, 3000)
@@ -101,11 +110,26 @@ const Product = (props) => {
                         <Link href={'/cart'}>View Cart</Link>
                       </div>
                     ) : ('')}
-                    <button
-                      className="bg-black hover:bg-gray-700 text-white py-2 px-4 rounded-md md:w-1/2 lg:w-1/3 h-16"
-                      onClick={() => handleClickAddToCart(productObj)}>
-                      Add To Cart
-                    </button>
+                    <div className='flex w-40 flex-row items-center h-16'>
+                      <input type='text' placeholder={cartItemsLength} value={cartItemsLength} onChange={(e)=>setCartItemsLength(e.target.value)} className='text-center text-gray-500 border mr-1 w-1/2 border-gray-500 rounded-md h-full'/>
+                      <button
+                        className="bg-black hover:bg-gray-700 text-white py-2 px-4 rounded-md md:w-1/2 lg:w-full h-16"
+                        onClick={() => handleClickAddToCart(productObj)}>
+                        Add To Cart
+                      </button>
+                    </div>
+                    <div class="flex items-center">
+                      <input type="radio" id="star5" name="rating" value="5" class="hidden" />
+                      <label for="star5" class="text-yellow-500">&#9733;</label>
+                      <input type="radio" id="star4" name="rating" value="4" class="hidden" />
+                      <label for="star4" class="text-yellow-500">&#9733;</label>
+                      <input type="radio" id="star3" name="rating" value="3" class="hidden" />
+                      <label for="star3" class="text-yellow-500">&#9733;</label>
+                      <input type="radio" id="star2" name="rating" value="2" class="hidden" />
+                      <label for="star2" class="text-yellow-500">&#9733;</label>
+                      <input type="radio" id="star1" name="rating" value="1" class="hidden" />
+                      <label for="star1" class="text-yellow-500">&#9733;</label>
+                    </div>
                   </div>
                 </div>
               </div>

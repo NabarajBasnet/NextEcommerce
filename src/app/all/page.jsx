@@ -15,9 +15,6 @@ function All() {
   const [minimumPrice, setMinimumPrice] = useState('')
   const [maximumPrice, setMaximumPrice] = useState('')
 
-  console.log('MinimumPrice Price: ', minimumPrice)
-  console.log('MaximumPrices Price: ', maximumPrice)
-  console.log(currentCategoryQuery)
 
   useEffect(() => {
     getProducts();
@@ -37,7 +34,7 @@ function All() {
 
   return (
     <>
-      <div className='flex flex-row items-start'>
+      <div className='flex flex-row items-start bg-slate-300'>
         <div className='flex flex-col w-80 bg-slate-300'>
           <div className='flex flex-col items-start'>
             <div className='flex flex-col items-start'>

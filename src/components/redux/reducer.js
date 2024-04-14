@@ -8,8 +8,7 @@ const initialState = {
 };
 
 const cartReducer = (state = initialState, action) => {
-    // console.log('Sub Total: ',state.subTotal)
-    // console.log('Total Items: ',state.cartItems)
+    // console.log('In redux store: ',state.cartItems)
     switch (action.type) {
         case 'ADD_TO_CART':
 
