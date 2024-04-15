@@ -45,16 +45,13 @@ export default function Home() {
                   })
                   .map((singleProduct) => (
                     <img key={singleProduct.id} src={singleProduct.imageurl} alt={singleProduct.name} />
-
-
-
                   ))
               }
 
             </div>
           </div>
 
-          <button onClick={() => router.push('/all')} className="bg-gray-100 border rounded border-red-200 text-red-700 hover:bg-red-700 hover:text-white transition-all hover:scale-105 p-2 w-1/6 mb-40 cursor-pointer">Shop The Products</button>
+          <button onClick={() => router.push('/all')} className="bg-gray-100 border rounded border-red-200 text-red-700 hover:bg-red-700 hover:text-white transition-all hover:scale-105 p-2 w-1/6 mb-52 cursor-pointer">Shop The Products</button>
 
           <div className="flex flex-col items-center w-full h-screen">
             <div className="w-full h-full flex flex-col items-center justify-center">

@@ -7,6 +7,7 @@ import {
   CogIcon,
   UserCircleIcon,
 } from "@heroicons/react/solid";
+import AdminDashboard from "@/app/admin/page";
 
 const Sidebar = () => {
   const menuItems = [
@@ -20,6 +21,7 @@ const Sidebar = () => {
 
   return (
     <div className="flex flex-col h-screen w-64 bg-gradient-to-b from-gray-800 to-gray-700 text-white">
+      <AdminDashboard/>
       <div className="p-4">
         <h1 className="text-2xl font-bold">Admin Panel</h1>
       </div>
